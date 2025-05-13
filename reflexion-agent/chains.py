@@ -32,3 +32,26 @@ Current time: {time}
 ).partial(
     time=lambda: datetime.datetime.now().isoformat(),
 )
+
+first_responder_prompt_template = actor_prompt_template.partial(
+    first_instruction="Provide a detailed ~250 word answer."
+)
+
+first_responder = first_responder_prompt_template | llm.bind_tools(
+    tools=[AnswerQuestion], tool_choice="AnswerQuestion"
+) #Grounding the response to the AnswerQuestion schema , tool_choice is to restrict the llm to only use the AnswerQuestion tool
+
+
+if __name__ == "__main__":
+    human_message = HumanMessage(
+        content="Write about AI-Powered SOC / autonomous soc  problem domain,"
+        " list startups that do that and raised capital."
+    )
+    chain = (
+        first_responder_prompt_template
+        | llm.bind_tools(tools=[AnswerQuestion], tool_choice="AnswerQuestion")
+        | parser_pydantic
+    )
+
+    res = chain.invoke(input={"messages": [human_message]})
+    print(res)
