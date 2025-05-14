@@ -22,6 +22,7 @@ text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
 doc_splits = text_splitter.split_documents(docs_list) # Split documents into chunks
 
 # We are commenting this because we dont want to persist/create the vectorstore every time we run this script , we only want to create it once and then retrieve from it
+
 # vectorstore = Chroma.from_documents(
 #     documents=doc_splits,
 #     collection_name="rag-chroma",
