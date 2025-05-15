@@ -1,6 +1,6 @@
 from typing import Any , Dict
 from graph.state import GraphState
-from graph.nodes.retriever import retrieval_grader
+from graph.chains.retriever_grader import retrieval_grader
 
 def grade_documents(state: GraphState) -> Dict[str, Any]:
     """
@@ -26,7 +26,7 @@ def grade_documents(state: GraphState) -> Dict[str, Any]:
     for doc in documents:
         # Check if the document is relevant to the question
         score = retrieval_grader.invoke({"document": doc, "question": question})
-        grade = score["binary_score"]
+        grade = score.binary_score
         if grade.lower() == "yes":
             print("---GRADE: DOCUMENT RELEVANT---")
             filtered_docs.append(doc)
