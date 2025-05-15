@@ -31,7 +31,7 @@ def grade_documents(state: GraphState) -> Dict[str, Any]:
             print("---GRADE: DOCUMENT RELEVANT---")
             filtered_docs.append(doc)
         else:
-            print("---GRADE: DOCUMENT NOT RELEVANT---")6
+            print("---GRADE: DOCUMENT NOT RELEVANT---")
             web_search = True
             continue
     # Update the state with the filtered documents and web_search flag
