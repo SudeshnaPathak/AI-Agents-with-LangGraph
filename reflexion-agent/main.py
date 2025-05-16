@@ -23,7 +23,13 @@ def event_loop(state: List[BaseMessage]) -> str:
         return END
     return "execute_tools"
 
-builder.add_conditional_edges("revise", event_loop)
+builder.add_conditional_edges("revise", 
+                              event_loop,
+                              {
+                                  "execute_tools": "execute_tools",
+                                  END: END,
+                              },
+                              )
 builder.set_entry_point("draft")
 graph = builder.compile()
 
