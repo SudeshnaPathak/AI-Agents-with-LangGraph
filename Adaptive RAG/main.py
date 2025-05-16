@@ -6,6 +6,6 @@ from pyppeteer import launch
 
 if __name__ == "__main__":
     print("Starting Advanced RAG...")
-    print(app.invoke(input={"question": "Whats is agent memory?"}))
+    print(app.invoke(input={"question": "What is agent memory?"}))
     
     
